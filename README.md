@@ -12,7 +12,9 @@ A production-ready demo showing how **Istio simplifies security, routing, and ob
 kubectl apply -f deploy/base/namespace.yaml
 helm install payments deploy/helm/ -n payments
 kubectl apply -f deploy/istio/
+```
 
 ### Deploy client using below command
 ```bash
 kubectl run grpc-client --rm -it --image=seswarrajan/grpc-mesh-demo:client -n payments
+```
