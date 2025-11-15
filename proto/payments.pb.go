@@ -146,7 +146,7 @@ const file_proto_payments_proto_rawDesc = "" +
 	"\x06status\x18\x01 \x01(\tR\x06status\x12%\n" +
 	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId2Z\n" +
 	"\x0fPaymentsService\x12G\n" +
-	"\x0eProcessPayment\x12\x18.payments.PaymentRequest\x1a\x19.payments.PaymentResponse\"\x00B2Z0github.com/example/grpc-mesh-demo/proto;paymentsb\x06proto3"
+	"\x0eProcessPayment\x12\x18.payments.PaymentRequest\x1a\x19.payments.PaymentResponse\"\x00B6Z4github.com/seswarrajan/grpc-mesh-demo/proto;paymentsb\x06proto3"
 
 var (
 	file_proto_payments_proto_rawDescOnce sync.Once
