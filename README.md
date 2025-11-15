@@ -1,4 +1,4 @@
-# gRPC + Istio Go Demo
+# gRPC Service Mesh Demo (gRPC + Istio + Go)
 
 This repository contains a minimal Go-based gRPC Payments service and client,
 plus Kubernetes & Istio manifests and a Helm chart skeleton.
