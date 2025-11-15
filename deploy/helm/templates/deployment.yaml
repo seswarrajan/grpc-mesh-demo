@@ -15,5 +15,6 @@ spec:
       containers:
       - name: payments
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.service.port }}
