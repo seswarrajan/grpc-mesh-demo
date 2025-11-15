@@ -9,7 +9,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	pb "github.com/example/grpc-mesh-demo/proto"
+	pb "github.com/seswarrajan/grpc-mesh-demo/proto"
 	"google.golang.org/grpc"
 )
 
