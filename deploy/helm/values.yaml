@@ -1,0 +1,6 @@
+replicaCount: 2
+image:
+  repository: example/payments
+  tag: v1
+service:
+  port: 50051

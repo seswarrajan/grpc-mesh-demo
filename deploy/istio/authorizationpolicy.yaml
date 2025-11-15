@@ -1,0 +1,13 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-from-client
+  namespace: payments
+spec:
+  selector:
+    matchLabels:
+      app: payments
+  rules:
+    - from:
+        - source:
+            principals: ["cluster.local/ns/payments/sa/payments-client"]
