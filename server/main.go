@@ -9,7 +9,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	pb "github.com/seswarrajan/grpc-mesh-demo/proto"
+	pb "github.com/example/grpc-mesh-demo/proto"
 	"google.golang.org/grpc"
 )
 
@@ -18,8 +18,7 @@ type server struct {
 }
 
 func (s *server) ProcessPayment(ctx context.Context, req *pb.PaymentRequest) (*pb.PaymentResponse, error) {
-	log.Printf("Processing payment: Order=%s Amount=%.2f %s", req.OrderId, req.Amount, req.Currency)
-	// In a real service you'd call payment gateway / DB etc.
+	log.Printf("Processing payment for order %s, amount %.2f %s", req.OrderId, req.Amount, req.Currency)
 	return &pb.PaymentResponse{
 		Status:        "SUCCESS",
 		TransactionId: fmt.Sprintf("txn-%s", req.OrderId),
