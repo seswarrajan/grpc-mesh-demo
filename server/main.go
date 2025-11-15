@@ -26,7 +26,7 @@ func (s *server) ProcessPayment(ctx context.Context, req *pb.PaymentRequest) (*p
 }
 
 func main() {
-	port := ":50051"
+	port := "0.0.0.0:50051"
 	lis, err := net.Listen("tcp", port)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
