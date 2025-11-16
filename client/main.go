@@ -5,6 +5,7 @@ import (
 	"log"
 	"time"
 
+	cron "github.com/go-co-op/gocron/v2"
 	pb "github.com/seswarrajan/grpc-mesh-demo/proto"
 	"google.golang.org/grpc"
 )
@@ -22,15 +23,30 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	req := &pb.PaymentRequest{
-		OrderId:  "ORD-1001",
-		Amount:   199.99,
-		Currency: "USD",
+	// create a scheduler
+	s, err := cron.NewScheduler()
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	resp, err := client.ProcessPayment(ctx, req)
+	_, err = s.NewJob(
+		cron.DurationJob(15*time.Second),
+		cron.NewTask(func() {
+			resp, err := client.ProcessPayment(ctx, &pb.PaymentRequest{
+				OrderId:  "ORDER-001",
+				Amount:   100,
+				Currency: "USD",
+			})
+			if err != nil {
+				log.Printf("[ERR] ProcessPayment error: %v", err)
+			}
+			log.Printf("Payment result: status=%s txn=%s", resp.Status, resp.TransactionId)
+		}),
+	)
 	if err != nil {
-		log.Fatalf("ProcessPayment error: %v", err)
+		log.Fatal(err)
 	}
-	log.Printf("Payment result: status=%s txn=%s", resp.Status, resp.TransactionId)
+	s.Start()
+
+	select {} // wait forever
 }
