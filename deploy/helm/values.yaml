@@ -1,6 +1,6 @@
 replicaCount: 2
 image:
-  repository: docker.io/seswarrajan/grpc-mesh-demo
-  tag: server
+  repository: docker.io/seswarrajan/payments
+  tag: v1
 service:
   port: 50051

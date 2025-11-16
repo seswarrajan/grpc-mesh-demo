@@ -16,7 +16,7 @@ spec:
       serviceAccountName: payments-sa
       containers:
         - name: payments
-          image: example/payments:v1
+          image: docker.io/seswarrajan/payments:v1
           ports:
             - containerPort: 50051
           readinessProbe:
