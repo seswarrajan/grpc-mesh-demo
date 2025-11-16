@@ -16,5 +16,5 @@ kubectl apply -f deploy/istio/
 
 ### Deploy client using below command
 ```bash
-kubectl run grpc-client --rm -it --image=seswarrajan/grpc-mesh-demo:client -n payments
+kubectl run grpc-client --image=seswarrajan/grpc-mesh-demo:client -n payments
 ```
