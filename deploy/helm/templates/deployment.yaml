@@ -1,20 +1,45 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "payments.name" . }}
+  name: {{ print (include "payments.name" .) "-v1" }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "payments.name" . }}
+      group: {{ include "payments.name" . }}
+      app: {{ print (include "payments.name" .) "-v1" }}
   template:
     metadata:
       labels:
-        app: {{ include "payments.name" . }}
+        group: {{ include "payments.name" . }}
+        app: {{ print (include "payments.name" .) "-v1" }}
     spec:
       containers:
       - name: payments
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        image: "{{ .Values.image.repository }}:v1"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.service.port }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ print (include "payments.name" .) "-v2" }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      group: {{ include "payments.name" . }}
+      app: {{ print (include "payments.name" .) "-v2" }}
+  template:
+    metadata:
+      labels:
+        group: {{ include "payments.name" . }}
+        app: {{ print (include "payments.name" .) "-v2" }}
+    spec:
+      containers:
+      - name: payments
+        image: "{{ .Values.image.repository }}:v2"
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.service.port }}

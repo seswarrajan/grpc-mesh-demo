@@ -14,6 +14,6 @@ spec:
         app: client
     spec:
       containers:
-        - name: payments
+        - name: client
           imagePullPolicy: Always
           image: docker.io/seswarrajan/grpc-mesh-demo:client

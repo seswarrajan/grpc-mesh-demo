@@ -39,6 +39,9 @@ func main() {
 	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, os.Interrupt, syscall.SIGTERM)
 
+	// log.Println("Serving gRPC on server:v1")
+	// log.Println("Serving gRPC on server:v2")
+
 	go func() {
 		log.Printf("gRPC server listening on %s", port)
 		if err := grpcServer.Serve(lis); err != nil {

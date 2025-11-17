@@ -12,15 +12,13 @@ import (
 
 var (
 	client pb.PaymentsServiceClient
-	ctx    context.Context
-	cancel context.CancelFunc
 	count  float64
 )
 
 func main() {
 	// In-cluster you'd use the service DNS 'payments:50051'
-	target := "payments:50051"
-	conn, err := grpc.Dial(target, grpc.WithInsecure(), grpc.WithBlock())
+	target := "payments.payments.svc.cluster.local:50051"
+	conn, err := grpc.Dial(target, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("failed to dial: %v", err)
 	}

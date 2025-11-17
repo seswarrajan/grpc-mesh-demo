@@ -4,7 +4,7 @@ metadata:
   name: {{ include "payments.name" . }}
 spec:
   selector:
-    app: {{ include "payments.name" . }}
+    group: {{ include "payments.name" . }}
   ports:
     - name: grpc
       port: {{ .Values.service.port }}
