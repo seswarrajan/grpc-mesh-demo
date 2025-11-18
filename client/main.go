@@ -36,7 +36,7 @@ func main() {
 		if err != nil {
 			log.Fatalf("ProcessPayment error: %v", err)
 		}
-		log.Printf("Payment result: status=%s txn=%s", resp.Status, resp.TransactionId)
-		time.Sleep(1 * time.Minute)
+		log.Printf("Payment result: status=%s txn=%s Processed_By_Deployment_Label=%v", resp.Status, resp.TransactionId, resp.DeploymentLabel)
+		time.Sleep(10 * time.Second)
 	}
 }

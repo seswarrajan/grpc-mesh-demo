@@ -4,7 +4,7 @@ go 1.25.1
 
 require (
 	github.com/go-co-op/gocron v1.37.0
-	github.com/seswarrajan/grpc-mesh-demo v0.0.0-20251115145221-94fb3c969878
+	github.com/seswarrajan/grpc-mesh-demo v0.0.0-20251118061829-4fb2a5705f36
 	google.golang.org/grpc v1.76.0
 )
 
