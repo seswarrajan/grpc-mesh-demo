@@ -45,8 +45,8 @@ func main() {
 	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, os.Interrupt, syscall.SIGTERM)
 
-	log.Println("Serving gRPC on server:v1")
-	// log.Println("Serving gRPC on server:v2")
+	// log.Println("Serving gRPC on server:v1")
+	log.Println("Serving gRPC on server:v2")
 
 	// Load in-cluster config
 	cfg, err := rest.InClusterConfig()
@@ -62,12 +62,12 @@ func main() {
 
 	deployClient := clientset.AppsV1().Deployments("payments")
 
-	deploy, err := deployClient.Get(context.TODO(), "payments-v1", v1.GetOptions{})
+	deploy, err := deployClient.Get(context.TODO(), "payments-v2", v1.GetOptions{})
 	if err != nil {
 		panic(err)
 	}
 
-	labels := deploy.Labels
+	labels := deploy.Spec.Selector.MatchLabels
 	for k, v := range labels {
 		DeploymentLabel += fmt.Sprintf("%s=%s,", k, v)
 	}
