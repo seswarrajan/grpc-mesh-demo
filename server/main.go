@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"flag"
 	"fmt"
 	"log"
 	"net"
@@ -14,7 +13,7 @@ import (
 	"google.golang.org/grpc"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/tools/clientcmd"
+	"k8s.io/client-go/rest"
 )
 
 var DeploymentLabel string
@@ -46,25 +45,24 @@ func main() {
 	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, os.Interrupt, syscall.SIGTERM)
 
-	// log.Println("Serving gRPC on server:v1")
+	log.Println("Serving gRPC on server:v1")
 	// log.Println("Serving gRPC on server:v2")
 
-	kubeconfig := flag.String("kubeconfig", "~/.kube/config", "path to kubeconfig")
-	flag.Parse()
-
-	config, err := clientcmd.BuildConfigFromFlags("", *kubeconfig)
+	// Load in-cluster config
+	cfg, err := rest.InClusterConfig()
 	if err != nil {
-		panic(err)
+		log.Fatalf("Error creating in-cluster config: %v", err)
 	}
 
-	clientset, err := kubernetes.NewForConfig(config)
+	// Create clientset
+	clientset, err := kubernetes.NewForConfig(cfg)
 	if err != nil {
-		panic(err)
+		log.Fatalf("Error creating clientset: %v", err)
 	}
 
 	deployClient := clientset.AppsV1().Deployments("payments")
 
-	deploy, err := deployClient.Get(context.TODO(), "payments-v2", v1.GetOptions{})
+	deploy, err := deployClient.Get(context.TODO(), "payments-v1", v1.GetOptions{})
 	if err != nil {
 		panic(err)
 	}
