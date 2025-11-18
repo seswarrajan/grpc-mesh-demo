@@ -82,11 +82,12 @@ func (x *PaymentRequest) GetCurrency() string {
 }
 
 type PaymentResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
-	TransactionId string                 `protobuf:"bytes,2,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Status          string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
+	TransactionId   string                 `protobuf:"bytes,2,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	DeploymentLabel string                 `protobuf:"bytes,3,opt,name=deployment_label,json=deploymentLabel,proto3" json:"deployment_label,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *PaymentResponse) Reset() {
@@ -133,6 +134,13 @@ func (x *PaymentResponse) GetTransactionId() string {
 	return ""
 }
 
+func (x *PaymentResponse) GetDeploymentLabel() string {
+	if x != nil {
+		return x.DeploymentLabel
+	}
+	return ""
+}
+
 var File_proto_payments_proto protoreflect.FileDescriptor
 
 const file_proto_payments_proto_rawDesc = "" +
@@ -141,10 +149,11 @@ const file_proto_payments_proto_rawDesc = "" +
 	"\x0ePaymentRequest\x12\x19\n" +
 	"\border_id\x18\x01 \x01(\tR\aorderId\x12\x16\n" +
 	"\x06amount\x18\x02 \x01(\x01R\x06amount\x12\x1a\n" +
-	"\bcurrency\x18\x03 \x01(\tR\bcurrency\"P\n" +
+	"\bcurrency\x18\x03 \x01(\tR\bcurrency\"{\n" +
 	"\x0fPaymentResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\tR\x06status\x12%\n" +
-	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId2Z\n" +
+	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\x12)\n" +
+	"\x10deployment_label\x18\x03 \x01(\tR\x0fdeploymentLabel2Z\n" +
 	"\x0fPaymentsService\x12G\n" +
 	"\x0eProcessPayment\x12\x18.payments.PaymentRequest\x1a\x19.payments.PaymentResponse\"\x00B6Z4github.com/seswarrajan/grpc-mesh-demo/proto;paymentsb\x06proto3"
 
