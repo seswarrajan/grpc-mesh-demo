@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package payments;
+
+option go_package = "github.com/seswarrajan/grpc-mesh-demo/proto;payments";
+
+service PaymentsService {
+  rpc ProcessPayment (PaymentRequest) returns (PaymentResponse) {}
+}
+
+message PaymentRequest {
+  string order_id = 1;
+  double amount = 2;
+  string currency = 3;
+}
+
+message PaymentResponse {
+  string status = 1;
+  string transaction_id = 2;
+  string deployment_label = 3;
+}
