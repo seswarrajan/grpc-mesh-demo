@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: payments-fault-test
+  namespace: payments
+spec:
+  hosts:
+    - payments.payments.svc.cluster.local
+  http:
+    - match:
+        - port: 50051
+      fault:
+        abort:
+          httpStatus: 503
+          percentage:
+            value: 30
+      route:
+        - destination:
+            host: payments.payments.svc.cluster.local
+            subset: v1

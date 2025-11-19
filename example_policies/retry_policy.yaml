@@ -1,0 +1,29 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: payments-vs
+  namespace: payments
+spec:
+  hosts:
+    - payments.payments.svc.cluster.local
+  http:
+    - name: "grpc-traffic"
+      match:
+        - port: 50051
+      timeout: 5s
+      retries:
+        attempts: 5
+        perTryTimeout: 1s
+        retryOn: >
+          connect-failure,
+          refused-stream,
+          unavailable,
+          cancelled,
+          deadline-exceeded,
+          resource-exhausted,
+          internal
+      route:
+        - destination:
+            host: payments.payments.svc.cluster.local
+            subset: v1
+          weight: 100
